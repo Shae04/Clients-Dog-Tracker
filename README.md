@@ -1,2 +1,1 @@
-This is one of my first projects I have worked on. This app is great for a local business owner who is trying to run a dog walking business. The user can track their clients info, add necessary comments and even
-add how much time they walked their dog.
+This project is a Windows Forms application designed to help manage and track information about various dogs and their walking activities. The application provides a user-friendly interface for adding, updating, and reporting on dog-related data. Here's a breakdown of its key components and functionality:
