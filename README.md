@@ -1,0 +1,1 @@
+This project is a Windows Forms application designed to help manage and track information about various dogs and their walking activities. The application provides a user-friendly interface for adding, updating, and reporting on dog-related data. Here's a breakdown of its key components and functionality:
