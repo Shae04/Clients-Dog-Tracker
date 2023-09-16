@@ -14,6 +14,12 @@ namespace Dog_Tracker
             dataGridViewClients.Columns.Add("Address", "Address");
             dataGridViewClients.Columns.Add("BehaviorNotes", "Behavior Notes");
             dataGridViewClients.Columns.Add("TotalTimeWalked", "Total Time Walked");
+
+            DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
+            imageColumn.HeaderText = "Dog Image";
+            imageColumn.Name = "DogImage";
+            imageColumn.ImageLayout = DataGridViewImageCellLayout.Stretch; // Stretch the image to fit the cell
+            dataGridViewClients.Columns.Add(imageColumn);
         }
 
         private int currentRowIndex = -1;// sets current index
@@ -26,10 +32,16 @@ namespace Dog_Tracker
             string address = txtAddress.Text;
             string behaviorNotes = txtBehaviorNotes.Text;
 
-            clients.Add(new Client(dogName, ownerName, address, behaviorNotes, 0));
+            if (string.IsNullOrEmpty(dogName) || string.IsNullOrEmpty(ownerName) || string.IsNullOrEmpty(address))
+            {
+                MessageBox.Show("Please fill in all required fields.");
+                return;
+            }
+
+            clients.Add(new Client(dogName, ownerName, address, behaviorNotes, 0, null));
 
             // Update the DataGridView with client information.
-            dataGridViewClients.Rows.Add(dogName, ownerName, address, behaviorNotes, 0);
+            dataGridViewClients.Rows.Add(dogName, ownerName, address, behaviorNotes);
 
             // Clear the input fields
             txtDogName.Clear();
@@ -80,26 +92,58 @@ namespace Dog_Tracker
                 currentRowIndex = e.RowIndex; // Store the index of the currently selected row.
                 string dogName = dataGridViewClients.Rows[e.RowIndex].Cells["DogName"].Value.ToString();
                 lblCurrentDog.Text = $"Current Dog: {dogName}";
+                // Check if the selected client has a dog image
+                if (clients[currentRowIndex].DogImage != null)
+                {
+                    pictureBoxDog.Image = clients[currentRowIndex].DogImage;
+                }
+                else
+                {
+                    // If there's no image, clear the PictureBox
+                    pictureBoxDog.Image = null;
+                }
             }
         }
-    }
 
-    public class Client
-    {
-        public string DogName { get; set; }
-        public string OwnerName { get; set; }
-        public string Address { get; set; }
-        public string BehaviorNotes { get; set; }
-        public int TotalTimeWalked { get; set; }
-
-        public Client(string dogName, string ownerName, string address, string behaviorNotes, int totalTimeWalked)
+        private void btnUploadImage_Click(object sender, EventArgs e)
         {
-            //declares vairables
-            DogName = dogName;
-            OwnerName = ownerName;
-            Address = address;
-            BehaviorNotes = behaviorNotes;
-            TotalTimeWalked = totalTimeWalked;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Load the selected image into a Bitmap
+                Bitmap dogImage = new Bitmap(openFileDialog.FileName);
+
+                // Store the image in the current client (assuming there's a selected client)
+                if (currentRowIndex >= 0 && currentRowIndex < clients.Count)
+                {
+                    clients[currentRowIndex].DogImage = dogImage;
+
+                    // Display the image in the DataGridView
+                    dataGridViewClients.Rows[currentRowIndex].Cells["DogImage"].Value = dogImage;
+                }
+            }
+        }
+
+        public class Client
+        {
+            public string DogName { get; set; }
+            public string OwnerName { get; set; }
+            public string Address { get; set; }
+            public string BehaviorNotes { get; set; }
+            public int TotalTimeWalked { get; set; }
+            public Bitmap DogImage { get; set; }
+
+            public Client(string dogName, string ownerName, string address, string behaviorNotes, int totalTimeWalked, Bitmap dogImage)
+            {
+                //declares vairables
+                DogName = dogName;
+                OwnerName = ownerName;
+                Address = address;
+                BehaviorNotes = behaviorNotes;
+                TotalTimeWalked = totalTimeWalked;
+                DogImage = dogImage;
+            }
         }
     }
 }

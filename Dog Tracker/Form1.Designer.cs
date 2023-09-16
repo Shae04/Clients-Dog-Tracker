@@ -45,9 +45,12 @@
             lblCurrentDog = new Label();
             groupBox2 = new GroupBox();
             label1 = new Label();
+            pictureBoxDog = new PictureBox();
+            btnUploadImage = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).BeginInit();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxDog).BeginInit();
             SuspendLayout();
             // 
             // txtDogName
@@ -162,7 +165,7 @@
             // 
             // btnGenerateReport
             // 
-            btnGenerateReport.Location = new Point(587, 332);
+            btnGenerateReport.Location = new Point(570, 338);
             btnGenerateReport.Name = "btnGenerateReport";
             btnGenerateReport.Size = new Size(133, 29);
             btnGenerateReport.TabIndex = 12;
@@ -173,7 +176,7 @@
             // dataGridViewClients
             // 
             dataGridViewClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewClients.Location = new Point(409, 106);
+            dataGridViewClients.Location = new Point(409, 90);
             dataGridViewClients.Name = "dataGridViewClients";
             dataGridViewClients.RowHeadersWidth = 51;
             dataGridViewClients.RowTemplate.Height = 29;
@@ -185,7 +188,7 @@
             // 
             lblCurrentDog.AutoSize = true;
             lblCurrentDog.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lblCurrentDog.Location = new Point(562, 67);
+            lblCurrentDog.Location = new Point(492, 47);
             lblCurrentDog.Name = "lblCurrentDog";
             lblCurrentDog.Size = new Size(158, 31);
             lblCurrentDog.TabIndex = 15;
@@ -206,17 +209,39 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            label1.Location = new Point(395, 297);
+            label1.Location = new Point(394, 289);
             label1.Name = "label1";
             label1.Size = new Size(519, 20);
             label1.TabIndex = 17;
             label1.Text = "Note: After adding client, select the populated row you would like to have active.";
             // 
+            // pictureBoxDog
+            // 
+            pictureBoxDog.BackColor = SystemColors.ActiveBorder;
+            pictureBoxDog.Location = new Point(986, 90);
+            pictureBoxDog.Name = "pictureBoxDog";
+            pictureBoxDog.Size = new Size(254, 188);
+            pictureBoxDog.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxDog.TabIndex = 18;
+            pictureBoxDog.TabStop = false;
+            // 
+            // btnUploadImage
+            // 
+            btnUploadImage.Location = new Point(1053, 298);
+            btnUploadImage.Name = "btnUploadImage";
+            btnUploadImage.Size = new Size(124, 29);
+            btnUploadImage.TabIndex = 19;
+            btnUploadImage.Text = "Upload Image";
+            btnUploadImage.UseVisualStyleBackColor = true;
+            btnUploadImage.Click += btnUploadImage_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(956, 450);
+            ClientSize = new Size(1312, 450);
+            Controls.Add(btnUploadImage);
+            Controls.Add(pictureBoxDog);
             Controls.Add(label1);
             Controls.Add(groupBox2);
             Controls.Add(lblCurrentDog);
@@ -230,6 +255,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxDog).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -253,5 +279,7 @@
         private Label lblCurrentDog;
         private GroupBox groupBox2;
         private Label label1;
+        private PictureBox pictureBoxDog;
+        private Button btnUploadImage;
     }
 }
